@@ -7,7 +7,6 @@ import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 const navigation = [
   { name: "Product", href: "#" },
   { name: "Features", href: "#" },
-  { name: "Marketplace", href: "#" },
   { name: "Company", href: "#" },
 ];
 
@@ -21,9 +20,9 @@ export default function Hero() {
           aria-label="Global"
           className="flex items-center justify-between p-6 lg:px-8"
         >
-          <div className="flex lg:flex-1">
+          <div className="flex lg:flex-1 sm:flex-1 md:flex-1">
             <a href="#" className="-m-1.5 p-1.5">
-              <span className="sr-only">Your Company</span>
+              <span className="sr-only">pivotPrince</span>
               <img
                 alt=""
                 src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
@@ -67,7 +66,7 @@ export default function Hero() {
           <DialogPanel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-gray-900 px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-white/10">
             <div className="flex items-center justify-between">
               <a href="#" className="-m-1.5 p-1.5">
-                <span className="sr-only">Your Company</span>
+                <span className="sr-only">pivotPrince</span>
                 <img
                   alt=""
                   src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
@@ -113,7 +112,7 @@ export default function Hero() {
       <div className="overflow-hidden relative isolate pt-14">
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+          className="absolute inset-x-0 -top-40 -z-10 transform-gpu  blur-3xl sm:-top-80"
         >
           <div
             style={{
@@ -125,23 +124,21 @@ export default function Hero() {
         </div>
         <div className="py-24 sm:py-32 lg:pb-40">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="mx-auto max-w-2xl text-center">
+            <div className="mx-auto max-w-3xl text-center">
               <h1 className="text-balance text-5xl font-semibold tracking-tight text-white sm:text-7xl">
-                Data to enrich your online business
+                Pivot Tables & Messaging, in One Click
               </h1>
               <p className="mt-8 text-pretty text-lg font-medium text-gray-400 sm:text-xl/8">
-                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-                lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat.
+                Instantly turn your spreadsheets into pivot tables and targeted
+                messages. Don’t analyze, don’t format, don’t draft. Just upload
+                and send.
               </p>
               <div className="mt-10 flex items-center justify-center gap-x-6">
                 <a
-                  href="#"
-                  className="rounded-md bg-indigo-500 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-400"
+                  href="#form"
+                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-lg font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
-                  Get started
-                </a>
-                <a href="#" className="text-sm/6 font-semibold text-white">
-                  Learn more <span aria-hidden="true">→</span>
+                  Try demo below &darr;
                 </a>
               </div>
             </div>
@@ -149,7 +146,7 @@ export default function Hero() {
         </div>
         <div
           aria-hidden="true"
-          className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+          className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu blur-3xl sm:top-[calc(100%-30rem)]"
         >
           <div
             style={{

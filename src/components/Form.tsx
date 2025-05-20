@@ -1,8 +1,61 @@
 "use client";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 // use dummy data and functionality to make a dummy demo
 import SelectInput from "./SelectInput";
 
 export default function Form() {
+  // access input file name
+  const [fileName, setFileName] = useState<string | null>(null);
+  const [templateName, setTemplateName] = useState<string | null>(null);
+  const [generatedOutput, setGeneratedOutput] = useState<string | null>(null);
+  const [copySuccess, setCopySuccess] = useState(false);
+
+  // handler functions
+  // handle setting file name
+  function handleSetFileName(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    if (file) {
+      setFileName(file.name);
+    }
+  }
+
+  // handle form submission
+  function handleSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    event.currentTarget.reset();
+
+    // output to be displayed
+    if (fileName && templateName) {
+      // dummy output
+      const dummyTable = `
+  | Route ID | Packages | Late Deliveries |
+  |----------|----------|-----------------|
+  | RTE001   |   148    |       2         |
+  | RTE002   |   121    |       0         |
+  | RTE003   |   134    |       4         |
+  `;
+
+      const dummyMessage = `Team,
+  
+  Please find the ${templateName} report generated from ${fileName}. Summary is below:
+  
+  - Total routes: 3
+  - Total packages: 403
+  - Late deliveries: 6
+  
+  Let me know if there are any questions.
+  
+  Thanks,  
+  [Your Name]`;
+
+      setGeneratedOutput(`${dummyTable}\n\n${dummyMessage}`);
+    }
+
+    // reset values
+    setFileName(null);
+    setTemplateName(null); // this triggers reset
+  }
+
   return (
     <div className="relative px-6 py-32 sm:py-32 lg:px-8">
       <div
@@ -28,7 +81,7 @@ export default function Form() {
       </div>
       {/* Start Form */}
       <form
-        action="#"
+        onSubmit={handleSubmit}
         method="POST"
         className="mx-auto mt-8 max-w-xl sm:mt-10"
         id="form"
@@ -47,26 +100,14 @@ export default function Form() {
                 name="dataFile"
                 type="file"
                 accept=".xlsx,.xls,.csv"
+                onChange={handleSetFileName}
                 className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-800 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
               />
             </div>
           </div>
           <div className="sm:col-span-2">
-            <label
-              htmlFor="email"
-              className="block text-md font-semibold text-gray-100"
-            >
-              Template
-            </label>
             <div>
-              {/* <input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-800 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
-              /> */}
-              <SelectInput />
+              <SelectInput selected={templateName} onSelect={setTemplateName} />
             </div>
           </div>
         </div>
@@ -79,6 +120,48 @@ export default function Form() {
           </button>
         </div>
       </form>
+      {generatedOutput && (
+        <div className="mt-10 relative rounded-md bg-white text-gray-900 shadow-md">
+          <div className="flex justify-between items-center px-4 pt-4">
+            <h3 className="text-xl font-semibold">Generated Report</h3>
+            <div className="flex items-center gap-2">
+              <button
+                onClick={() => {
+                  navigator.clipboard.writeText(generatedOutput ?? "");
+                  setCopySuccess(true);
+                  setTimeout(() => setCopySuccess(false), 2000);
+                }}
+                title="Copy to clipboard"
+                className="text-gray-500 hover:text-gray-800 transition cursor-pointer"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="w-6 h-6"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-2 10h2a2 2 0 002-2v-8a2 2 0 00-2-2h-2m-8 8h8"
+                  />
+                </svg>
+              </button>
+              {copySuccess && (
+                <span className="text-green-600 text-sm font-medium">
+                  Copied!
+                </span>
+              )}
+            </div>
+          </div>
+
+          <div className="px-4 pb-4 whitespace-pre-line">
+            <pre className="font-mono text-sm mt-2">{generatedOutput}</pre>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

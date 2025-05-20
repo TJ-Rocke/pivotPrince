@@ -95,14 +95,24 @@ export default function Form() {
               Excel file
             </label>
             <div className="mt-2.5">
-              <input
-                id="dataFile"
-                name="dataFile"
-                type="file"
-                accept=".xlsx,.xls,.csv"
-                onChange={handleSetFileName}
-                className="block w-full rounded-md bg-white px-3.5 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-800 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600"
-              />
+              <div className="relative flex items-center w-full rounded-md bg-white border border-gray-300 px-3.5 py-2 text-base text-gray-900">
+                <label
+                  htmlFor="dataFile"
+                  className="cursor-pointer font-medium text-indigo-600 hover:text-indigo-800"
+                >
+                  Choose File
+                </label>
+                <span className="mx-2 text-gray-300">|</span>
+                <span className="truncate">{fileName || "No file chosen"}</span>
+                <input
+                  id="dataFile"
+                  name="dataFile"
+                  type="file"
+                  accept=".xlsx,.xls,.csv"
+                  onChange={handleSetFileName}
+                  className="absolute inset-0 opacity-0 cursor-pointer"
+                />
+              </div>
             </div>
           </div>
           <div className="sm:col-span-2">
